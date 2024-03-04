@@ -1,0 +1,121 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+//trang-chu
+Route::get('/', [App\Http\Controllers\UserController::class, 'getIndex'])->name("index");
+
+//banner
+// Route::get('/banner', [App\Http\Controllers\UserController::class, 'getBanner'])->name("getBanner");
+// Route::get('/post/add', [App\Http\Controllers\PostController::class, 'add'])->name("add");
+/* =============================================USER=======================================*/
+// tất cả code nằm trong userController
+//dang nhap google
+
+//loai san pham & chi tiet san pham & tim kiem & tat ca san pham
+Route::get('/san-pham', [App\Http\Controllers\UserController::class, 'getProduct'])->name("product");
+Route::get('/chi-tiet-san-pham', [App\Http\Controllers\UserController::class, 'getDetailProduct'])->name("detailProduct");
+
+//lien he & gioi thieu &tin tuc
+//1. gioi thieu
+Route::get('/gioi-thieu', [App\Http\Controllers\UserController::class, 'getIntro'])->name("intro");
+//2. tin tuc
+Route::get('/tin-tuc', [App\Http\Controllers\UserController::class, 'getNews'])->name("news");
+//3. lien he
+Route::get('/lien-he', [App\Http\Controllers\UserController::class, 'getContact'])->name("contact");
+
+//cam nang
+Route::get('/cam-nang-du-lich', [App\Http\Controllers\UserController::class, 'getTipTravel'])->name("tipTravel");
+//gio hang
+//dat hang
+//tai khoan
+//1. dang ky va dang nhap
+Route::post('/login', [App\Http\Controllers\AccountAuthController::class, 'login'])->name('login');
+
+// Tuyến đường đăng xuất
+Route::get('/logout', [App\Http\Controllers\AccountAuthController::class, 'logout'])->name('logout');
+
+// Tuyến đường đăng ký
+Route::post('/register', [App\Http\Controllers\AccountAuthController::class, 'register'])->name('register');
+//2. dang xuat
+
+//
+
+
+
+/* =============================================ADMIN=======================================*/
+//dashboard -- nơi đây thống kê số nguời dùng , sp bán chạy, tài khoan -> adminController
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'getDashBoard'])->name("admin");
+
+//user --ql tài khoản như thêm sửa xóa phân quyền -> AccountController
+Route::get('/tai-khoan', [App\Http\Controllers\AccountController::class, 'listAccount'])->name("listAccount");
+Route::get('/them-tai-khoan', [App\Http\Controllers\AccountController::class, 'addAccount'])->name("addAccount");
+Route::get('/sua-tai-khoan/{id}', [App\Http\Controllers\AccountController::class, 'edit'])->name("editAccount");
+Route::post('/cap-nhat-tai-khoan/{id}', [App\Http\Controllers\AccountController::class, 'updateDemo'])->name("updateDemo");
+Route::get('/xoa-tai-khoan/{id}', [App\Http\Controllers\AccountController::class, 'delete'])->name("deleteAccount");
+Route::post('/tim-tai-khoan', [App\Http\Controllers\AccountController::class, 'search'])->name('searchAccount');
+Route::post('/luu-tai-khoan', [App\Http\Controllers\AccountController::class, 'storeDemo'])->name('storeAccount');
+
+
+
+//slide -- baner thêm sửa xóa -> BannerController
+Route::get('/banner', [App\Http\Controllers\BannerController::class, 'listBanner'])->name("listBanner");
+Route::get('/them-banner', [App\Http\Controllers\BannerController::class, 'addBanner'])->name("addBanner");
+Route::get('/delete-banner/{id}', [App\Http\Controllers\BannerController::class, 'delete'])->name('deleteBanner');
+Route::post('/luu-banner', [App\Http\Controllers\BannerController::class, 'storeBanner'])->name("storeBanner");
+Route::post('/tim-banner', [App\Http\Controllers\BannerController::class, 'searchBanner'])->name('searchBanner');
+Route::get('/edit-banner/{id}', [App\Http\Controllers\BannerController::class, 'edit'])->name('editBanner');
+Route::post('/update-banner/{id}', [App\Http\Controllers\BannerController::class, 'update'])->name('updateBanner');
+
+//thuong hieu san pham: add, del, edit,searh --> ProductTypeController
+Route::get('/thuong-hieu-san-pham', [App\Http\Controllers\ProductTypeController::class, 'getProductType'])->name("productType");
+Route::get('/them-thuong-hieu-san-pham', [App\Http\Controllers\ProductTypeController::class, 'addProductType'])->name("addProductType");
+Route::get('/xoa-thuong-hieu-san-pham/{id}', [App\Http\Controllers\ProductTypeController::class, 'deleteProductType'])->name("deleteProductType");
+Route::post('/tim-thuonghieu', [App\Http\Controllers\ProductTypeController::class, 'searchProductType'])->name('searchProductType');
+Route::post('/luu-thuong-hieu', [App\Http\Controllers\ProductTypeController::class, 'storeCategory'])->name("storeCategory");
+Route::get('/edit-category/{id}', [App\Http\Controllers\ProductTypeController::class, 'edit'])->name('editCategory');
+Route::post('/update-category/{id}', [App\Http\Controllers\ProductTypeController::class, 'update'])->name('updateCategory');
+
+
+//san pham  add, del, edit,searh --> ProductControllerd}
+Route::get('/admin-san-pham', [App\Http\Controllers\ProductController::class, 'getProduct'])->name("getProduct");
+Route::get('/them-san-pham', [App\Http\Controllers\ProductController::class, 'addProduct'])->name("addProduct");
+Route::post('/luu-san-pham', [App\Http\Controllers\ProductController::class, 'storeProductDemo'])->name("storeProductDemo");
+Route::get('/xoa-san-pham/{id}', [App\Http\Controllers\ProductController::class, 'deleteProduct'])->name("deleteProduct");
+Route::get('/sua-san-pham/{id}', [App\Http\Controllers\ProductController::class, 'editProduct'])->name("editProduct");
+Route::post('/cap-nhat-san-pham/{id}', [App\Http\Controllers\ProductController::class, 'updateProduct'])->name("updateProduct");
+Route::post('/tim-san-pham', [App\Http\Controllers\ProductController::class, 'searchProduct'])->name('searchProduct');
+
+//don hang add, del, edit,searh, detail order --> OrderController
+Route::get('/admin-don-hang', [App\Http\Controllers\OrderController::class, 'getOrder'])->name("getOrder");
+
+//lien he: xem thong tin lien he nguoi dung gui --> ContactController
+Route::get('/admin-lien-he', [App\Http\Controllers\ContactController::class, 'getContact'])->name("getContact");
+Route::get('/delete-lien-he/{id}', [App\Http\Controllers\ContactController::class, 'deleteContact'])->name('deleteContact');
+
+//tin tuc: add, del, edit,searh --> NewsController
+Route::get('/admin-tin-tuc', [App\Http\Controllers\NewsController::class, 'getNews'])->name("getNews");
+Route::get('/them-tin-tuc', [App\Http\Controllers\NewsController::class, 'addNews'])->name("addNews");
+//them tin tuc: add, del, edit,searh --> NewsController
+Route::post('/luu-tin-tuc', [App\Http\Controllers\NewsController::class, 'store'])->name("storeNews");
+Route::get('/delete-news/{id}', [App\Http\Controllers\NewsController::class, 'delete'])->name('deleteNews');
+Route::post('/admin-tin-tuc', [App\Http\Controllers\NewsController::class, 'searchNews'])->name('searchNews');
+Route::get('/edit-news/{id}', [App\Http\Controllers\NewsController::class, 'edit'])->name('editNews');
+Route::post('/update-news/{id}', [App\Http\Controllers\NewsController::class, 'update'])->name('updateNews');
+
+
+// cam nang du lich: add, del, edit,searh --> tipTravelController
+Route::get('/admin-cam-nang', [App\Http\Controllers\TipController::class, 'listTip'])->name("listTip");
+Route::get('/them-cam-nang', [App\Http\Controllers\TipController::class, 'addTip'])->name("addTip");
