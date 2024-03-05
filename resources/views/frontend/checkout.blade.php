@@ -8,8 +8,8 @@
             width: 90%;
             background-color: #f2f2f2cd;
             border-radius: 6px;
-            padding: 0 20px;
-            {{--  margin: auto;  --}} margin-bottom: 30px;
+            margin: auto;
+            margin-bottom: 30px;
         }
 
         .infor {
@@ -106,9 +106,8 @@
             padding: 20px;
         }
     </style>
-    </style>
     <h2 style="margin: 20px 80px ">THÔNG TIN KHÁCH HÀNG</h2>
-    <div class="main container mx-3">
+    <div class="main">
         <div class="infor">
             <div class="infor2">
                 <div class="hoten">
@@ -135,9 +134,7 @@
             </div>
             <div>
                 <button type="button" class='button'>
-                    <a href="{{ route('getSuccess') }}">
-                        ĐẶT HÀNG <br>HOTLINE: 0394407543 (24/7)
-                    </a>
+                    <a href="{{ route('getSuccess') }}"> ĐẶT HÀNG <br>HOTLINE: 0394407543 (24/7)</a>
 
                 </button>
             </div>
