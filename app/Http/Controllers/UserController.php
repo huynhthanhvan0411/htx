@@ -31,11 +31,26 @@ class UserController extends Controller
         $products = Product::where('status', 1)->get();
         $categories = Category::all();
         $origins = Origin::all();
-        return view('frontend.product', compact('products', 'categories', 'origins'));
+        // Tạo một mảng chứa các sản phẩm theo từng danh mục
+        $productsByCategory = [];
+        foreach ($categories as $category) {
+            $productsByCategory[$category->name] = Product::where('category_id', $category->id)->where('status', 1)
+                ->latest()->limit(4)
+                ->get();
+        }
+        return view('frontend.product', compact('products', 'categories', 'origins', 'productsByCategory'));
     }
-    public function getDetailProduct(Request $request)
+    public function getDetailProduct(Request $request, $id)
     {
-        return view('frontend.detailProduct');
+        $product = Product::findOrFail($id);
+        // Lấy danh mục của sản phẩm đang xem
+        $category = $product->category;
+        // Lấy ra các sản phẩm cùng danh mục (trừ sản phẩm đang xem)
+        $relatedProducts = Product::where('category_id', $category->id)
+            ->where('id', '!=', $product->id) // Loại bỏ sản phẩm đang xem
+            ->limit(4) // Giới hạn số lượng sản phẩm liên quan
+            ->get();
+        return view('frontend.detailProduct', compact('product', 'category', 'relatedProducts'));
     }
     // gioi thieu, tin tuc, lien he  //
     public  function getIntro(Request $request)
@@ -50,8 +65,6 @@ class UserController extends Controller
         // Lấy 4 tin tức mới nhất với trường status là 1, sắp xếp theo thời gian tạo giảm dần
         $latest_news = News::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
 
-        // Lấy 5 tiêu đề của tin tức mới nhất để hiển thị ở phía trên
-        // $latest_titles = News::where('status', 1)->orderBy('created_at', 'desc')->take(5)->pluck('title');
         $latest_titles = News::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         return view('frontend.news', compact('news', 'latest_news', 'latest_titles'));
     }

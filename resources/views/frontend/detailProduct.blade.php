@@ -5,13 +5,16 @@
 @section('content-layout')
     <div class="detail container  py-4">
         <div class="  picture--product ">
-            <img src="{{ asset('source/assets/frontend/images/thit_trau_gac_bep.jpg') }}">
+            <img src="{{ asset('source/images/product/' . $product->image) }}" alt="">
         </div>
         <div class=" information_product">
-            <h3>CƠM LAM</h3>
-            <p class="discount--detail"> <span>150,000</span> VND</p>
-            <p>NHÃN HIỆU: ĐẶC SẢN MƯỜNG HOA</p>
-            <p>MÔ TẢ: <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, qui!</span>
+            <h3>{{ $product->name }}</h3>
+            <h3></h3>
+            <p class="discount--detail"> <span>{{ number_format($product->sale_price) }} VND</span> <span
+                    style="text-decoration: line-through;">{{ number_format($product->price) }} VND</span> </p>
+            <p>NHÃN HIỆU: <span>{{ $product->category->name }}</span> </p>
+            <p>Nguồn gốc <span>{{ $product->origin->address }}</span></p>
+            <p>MÔ TẢ: <span> {{ $product->description }}</span>
             </p>
             <div id="buy-amount">
                 <button class="plus"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -31,46 +34,26 @@
         </div>
     </div>
     <hr>
-    <div class="py-4 container">
+    <div class="  container py-4  ">
         <h3 class="title">SẢN PHẨM LIÊN QUAN</h3>
         <div class="row">
-            <div class="col-3 information_products">
-                <a href="{{ route('detailProduct') }}" style="text-decoration: none;">
-                    <img class='picture' src="{{ asset('source/assets/frontend/images/thit_trau_gac_bep.jpg') }}"
-                        alt="">
-                    <p class="name">NẤM HƯƠNG RỪNG HOA</p>
-                    <p class="price"><b>150.000 VNĐ</b></p>
-                </a>
-
-                <button class="btnCart">Thêm giỏ hàng</button>
-            </div>
-            <div class="col-3 information_products">
-                <a href="#" style="text-decoration: none;">
-                    <img class='picture' src="{{ asset('source/assets/frontend/images/thit_trau_gac_bep.jpg') }}"
-                        alt="">
-                    <p class="name">NẤM HƯƠNG RỪNG HOA</p>
-                    <p class="price"><b>150.000 VNĐ</b></p>
-                </a>
-                <button class="btnCart">Thêm giỏ hàng</button>
-            </div>
-            <div class="col-3 information_products">
-                <a href="#" style="text-decoration: none;">
-                    <img class='picture' src="{{ asset('source/assets/frontend/images/thit_trau_gac_bep.jpg') }}"
-                        alt="">
-                    <p class="name">NẤM HƯƠNG RỪNG HOA</p>
-                    <p class="price"><b>150.000 VNĐ</b></p>
-                </a>
-                <button class="btnCart">Thêm giỏ hàng</button>
-            </div>
-            <div class="col-3 information_products">
-                <a href="#" style="text-decoration: none;">
-                    <img class='picture' src="{{ asset('source/assets/frontend/images/thit_trau_gac_bep.jpg') }}"
-                        alt="">
-                    <p class="name">NẤM HƯƠNG RỪNG HOA</p>
-                    <p class="price"><b>150.000 VNĐ</b></p>
-                </a>
-                <button class="btnCart">Thêm giỏ hàng</button>
-            </div>
+            @foreach ($relatedProducts as $relatedProduct)
+                <div class="col-3 information_products">
+                    <a href="{{ route('detailProduct', $relatedProduct->id) }}" style="text-decoration: none;">
+                        <img class='picture' src="{{ asset('source/images/product/' . $relatedProduct->image) }}"
+                            alt="">
+                        <p class="name">{{ $relatedProduct->name }}</p>
+                        <p class="price"><b>{{ number_format($relatedProduct->price) }} VNĐ</b></p>
+                    </a>
+                    <form action="#" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $relatedProduct->id }}">
+                        <!-- Các trường ẩn khác nếu cần -->
+                        <button type="submit" class="btnCart">Thêm vào giỏ hàng</button>
+                    </form>
+                </div>
+            @endforeach
         </div>
+        <hr>
     </div>
 @endsection

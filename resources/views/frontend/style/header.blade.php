@@ -51,11 +51,11 @@
                          <li class="nav-item">
                              <a class="nav-link" href="{{ route('news') }}">Tin tức</a>
                          </li>
-                         {{--  <li class="nav-item">
-                             <a class="nav-link " href="">Sản phẩm </a>
-                         </li>  --}}
-                         <li class="nav-item dropdown">
-                             <a class="nav-link dropdown-toggle" href="{{ route('product') }}"
+                         <li class="nav-item">
+                             <a class="nav-link " href="{{ route('product') }}">Sản phẩm </a>
+                         </li>
+                         {{--  <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" href=""
                                  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
                                  aria-expanded="false">
                                  Sản phẩm
@@ -63,7 +63,7 @@
                              <div class="dropdown-menu" style="color: black" aria-labelledby="navbarDropdownMenuLink">
 
                              </div>
-                         </li>
+                         </li>  --}}
                          <li class="nav-item">
                              <a class="nav-link " href="service.php">Dịch vụ</a>
                          </li>

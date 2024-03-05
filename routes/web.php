@@ -25,7 +25,7 @@ Route::get('/', [App\Http\Controllers\UserController::class, 'getIndex'])->name(
 
 //loai san pham & chi tiet san pham & tim kiem & tat ca san pham
 Route::get('/san-pham', [App\Http\Controllers\UserController::class, 'getProduct'])->name("product");
-Route::get('/chi-tiet-san-pham', [App\Http\Controllers\UserController::class, 'getDetailProduct'])->name("detailProduct");
+Route::get('/chi-tiet-san-pham/{id}', [App\Http\Controllers\UserController::class, 'getDetailProduct'])->name("detailProduct");
 
 //lien he & gioi thieu &tin tuc
 //1. gioi thieu
