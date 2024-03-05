@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class AccountAuthController extends Controller
 {
     //login
-    public function login(Request $request)
+    public function getLogin(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -29,6 +29,18 @@ class AccountAuthController extends Controller
         }
     }
 
+    public function postLogin(Request $request)
+    {
+    }
+
+    //register
+    public function getRegister()
+    {
+        return view('auth.register');
+    }
+    public function postRegister()
+    {
+    }
 
     //logout
     public function logout()
@@ -61,5 +73,9 @@ class AccountAuthController extends Controller
 
         // You can customize your redirect here
         return redirect()->route('index')->with('thongbao', 'Đăng ký thành công');
+    }
+    public function loginAdmin(Request $request)
+    {
+        return view('admin.loginAdmin');
     }
 }

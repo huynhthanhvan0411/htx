@@ -68,6 +68,8 @@ Route::post('/register', [App\Http\Controllers\AccountAuthController::class, 're
 
 
 /* =============================================ADMIN=======================================*/
+// trang login rieng cua admin
+Route::get('/admin-login', [App\Http\Controllers\AccountAuthController::class, 'loginAdmin'])->name("loginAdmin");
 //dashboard -- nơi đây thống kê số nguời dùng , sp bán chạy, tài khoan -> adminController
 
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'getDashBoard'])->name("admin");
