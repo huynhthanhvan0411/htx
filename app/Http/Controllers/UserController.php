@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Origin;
+use App\Models\News;
 
 class UserController extends Controller
 {
@@ -42,7 +43,9 @@ class UserController extends Controller
     }
     public function getNews(Request $request)
     {
-        return view('frontend.news');
+        //hien thi tin tuc
+        $news = News::where('status', 1)->get();
+        return view('frontend.news', compact('news'));
     }
     public function getContact(Request $request)
     {

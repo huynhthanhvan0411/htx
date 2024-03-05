@@ -2,6 +2,9 @@
 @section('title-ad')
     Danh mục sản phẩm
 @endsection
+@section('nav')
+    Danh mục sản phẩm
+@endsection
 @section('content-admin')
     <form action="{{ route('searchProductType') }}" class="form-inline" method="post">
         @csrf

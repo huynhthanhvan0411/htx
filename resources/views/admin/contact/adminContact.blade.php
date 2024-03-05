@@ -2,6 +2,9 @@
 @section('title-ad')
     Contact Management
 @endsection
+@section('nav')
+    Contact Management
+@endsection
 @section('content-admin')
     <form action="{{ route('getContact') }}" class="form-inline" method="post">
         <div class="form-group">

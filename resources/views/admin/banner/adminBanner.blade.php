@@ -2,6 +2,9 @@
 @section('title-ad')
     Banner Management
 @endsection
+@section('nav')
+    Danh mục
+@endsection
 @section('content-admin')
     <form action="{{ route('searchBanner') }}" class="form-inline" method="post">
         @csrf

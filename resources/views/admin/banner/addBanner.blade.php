@@ -2,6 +2,9 @@
 @section('title-ad')
     Thêm banner
 @endsection
+@section('nav')
+    Thêm banner
+@endsection
 @section('content-admin')
     <form action="{{ route('storeBanner') }}" class="bannerForm" method="post" enctype="multipart/form-data">
         @csrf

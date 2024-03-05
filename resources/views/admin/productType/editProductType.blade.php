@@ -2,6 +2,10 @@
 @section('title-ad')
     Cập nhật danh mục
 @endsection
+@section('nav')
+    Cập nhật danh mục
+@endsection
+
 @section('content-admin')
     <form action="{{ route('updateCategory', $categories->id) }}" class="bannerForm" method="post"
         enctype="multipart/form-data">

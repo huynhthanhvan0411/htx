@@ -2,6 +2,9 @@
 @section('title-ad')
     News Management
 @endsection
+@section('nav')
+    News Management
+@endsection
 @section('content-admin')
     <form action="{{ route('getNews') }}" class="form-inline" method="post">
         @csrf

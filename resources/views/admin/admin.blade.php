@@ -36,7 +36,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="" class="nav-link">thanh dọc</a>
+                    <a href="" class="nav-link">@yield('nav')</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">

@@ -1,6 +1,9 @@
 @extends('admin.admin')
 @section('title-ad')
-    Thêm tk
+    Thêm tài khoản
+@endsection
+@section('nav')
+    Thêm tài khoản
 @endsection
 @section('content-admin')
     <form id="accountForm" action="{{ route('storeAccount') }}" class="bannerForm" method="post" enctype="multipart/form-data">

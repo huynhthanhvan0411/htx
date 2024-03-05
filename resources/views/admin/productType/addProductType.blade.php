@@ -2,6 +2,9 @@
 @section('title-ad')
     Thêm danh mục
 @endsection
+@section('nav')
+    Thêm danh mục
+@endsection
 @section('content-admin')
     <form action="{{ route('storeCategory') }}" class="bannerForm" method="post" enctype="multipart/form-data">
         @csrf

@@ -2,6 +2,9 @@
 @section('title-ad')
     Thêm sản phẩm
 @endsection
+@section('nav')
+    Thêm sản phẩm
+@endsection
 @section('content-admin')
     <form action="{{ route('storeProductDemo') }}" method="post" enctype="multipart/form-data">
         @csrf

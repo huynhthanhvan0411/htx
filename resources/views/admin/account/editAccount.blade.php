@@ -1,6 +1,9 @@
 @extends('admin.admin')
 @section('title-ad')
-    Thêm tk
+    Cập nhật tài khoản
+@endsection
+@section('nav')
+    Cập nhật tài khoản
 @endsection
 @section('content-admin')
     <form id="accountForm" action="{{ route('updateDemo', $account->id) }}" class="bannerForm" method="post"

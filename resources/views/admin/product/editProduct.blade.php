@@ -1,6 +1,9 @@
 @extends('admin.admin')
 @section('title-ad')
-    Chỉnh sửa sản phẩm
+    Cập nhật sản phẩm
+@endsection
+@section('nav')
+    Cập nhật sản phẩm
 @endsection
 @section('content-admin')
     <form action="{{ route('updateProduct', $product->id) }}" method="post" enctype="multipart/form-data">

@@ -2,6 +2,9 @@
 @section('title-ad')
     Update Management
 @endsection
+@section('nav')
+    Update Management
+@endsection
 @section('content-admin')
     <form action="{{ route('updateNews', $news->id) }}" class="bannerForm" method="post" enctype="multipart/form-data">
         @csrf

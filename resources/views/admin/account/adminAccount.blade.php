@@ -2,6 +2,9 @@
 @section('title-ad')
     Account Managerment
 @endsection
+@section('nav')
+    Danh mục
+@endsection
 @section('content-admin')
     <form action="{{ route('searchAccount') }}" class="form-inline" method="post">
         @csrf

@@ -2,6 +2,9 @@
 @section('title-ad')
     Cập nhật banner
 @endsection
+@section('nav')
+    Cập nhật banner
+@endsection
 @section('content-admin')
     <form action="{{ route('updateBanner', $banners->id) }}" class="bannerForm" method="post" enctype="multipart/form-data">
         @csrf
