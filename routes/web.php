@@ -32,6 +32,8 @@ Route::get('/chi-tiet-san-pham', [App\Http\Controllers\UserController::class, 'g
 Route::get('/gioi-thieu', [App\Http\Controllers\UserController::class, 'getIntro'])->name("intro");
 //2. tin tuc
 Route::get('/tin-tuc', [App\Http\Controllers\UserController::class, 'getNews'])->name("news");
+Route::get('/chi-tiet-tin-tuc/{id}', [App\Http\Controllers\UserController::class, 'getDetailNews'])->name("getDetailNews");
+
 //3. lien he
 Route::get('/lien-he', [App\Http\Controllers\UserController::class, 'getContact'])->name("contact");
 

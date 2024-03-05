@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="ad-bn-cr-description">Nội dung</label>
                     <textarea class="form-control" id="ad-bn-cr-description" name="description" placeholder="Banner description"
-                        style="height: 200px;">{{ $news->description }}</textarea>
+                        style="height: 40rem;">{{ $news->description }}</textarea>
                 </div>
             </div>
 

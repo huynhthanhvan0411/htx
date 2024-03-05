@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Origin;
 use App\Models\News;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -41,11 +42,24 @@ class UserController extends Controller
     {
         return view('frontend.intro');
     }
+    // tin tuc va chi tiet tin tuc
     public function getNews(Request $request)
     {
         //hien thi tin tuc
         $news = News::where('status', 1)->get();
-        return view('frontend.news', compact('news'));
+        // Lấy 4 tin tức mới nhất với trường status là 1, sắp xếp theo thời gian tạo giảm dần
+        $latest_news = News::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+
+        // Lấy 5 tiêu đề của tin tức mới nhất để hiển thị ở phía trên
+        // $latest_titles = News::where('status', 1)->orderBy('created_at', 'desc')->take(5)->pluck('title');
+        $latest_titles = News::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.news', compact('news', 'latest_news', 'latest_titles'));
+    }
+    public function getDetailNews(Request $request, $id)
+    {
+        $news = News::findOrFail($id);
+
+        return view('frontend.newDetail', compact('news'));
     }
     public function getContact(Request $request)
     {

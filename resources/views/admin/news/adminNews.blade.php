@@ -22,7 +22,6 @@
             <tr>
                 <th>STT</th>
                 <th>Tiêu đề</th>
-                <th>Nội dung</th>
                 <th>Trạng thái</th>
                 <th>Ngày tạo</th>
                 <th>Hình ảnh</th>
@@ -38,9 +37,6 @@
                     <td>{{ $count++ }}</td>
                     <td>{{ $new->title }}</td>
                     <td>
-                        <span>{{ $new->description }}</span>
-                    </td>
-                    <td>
                         @if ($new->status == 1)
                             <span class="badge badge-success">Visible</span>
                         @else
@@ -49,7 +45,8 @@
                     </td>
                     <td>{{ $new->created_at }}</td>
                     <td>
-                        <img src="{{ asset('source/images/news/' . $new->image) }}" width="60" alt="img-news">
+                        <img src="{{ asset('source/images/news/' . $new->image) }}" style="width: 50px; height: 50px;"
+                            alt="img-news">
                     </td>
                     <td class="text-right">
                         <a href="{{ route('editNews', $new->id) }}" class="btn btn-sm btn-success">

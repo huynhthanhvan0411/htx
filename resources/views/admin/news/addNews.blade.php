@@ -17,14 +17,6 @@
                         onkeyup="validateNotEmpty(this, 'Banner name');">
                 </div>
                 <div class="form-group">
-                    <label for="ad-bn-cr-description">Nội dung</label>
-                    <textarea class="form-control" id="ad-bn-cr-description" name="description" placeholder="Banner description"
-                        style="height: 200px;"></textarea>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="form-group">
                     <label for="ad-bn-cr-status">Trạng thái</label>
                     <select name="status" class="form-control" id='ad-bn-cr-status'>
                         <option value="1" selected>Hiển thị</option>
@@ -47,10 +39,19 @@
                     </div>
 
                 </div>
+
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="ad-bn-cr-description">Nội dung</label>
+                    <textarea class="form-control" id="ad-bn-cr-description" name="description" placeholder="Banner description"
+                        style="height: 40rem; " cols="50"></textarea>
+                </div>
             </div>
 
             <div class="row">
-                <img src="#" alt="no-image" style="width:100%; padding: 15px" id="blah">
+                <img src="#" alt="no-image" style="width:60px; height: 50px;" id="blah">
             </div>
         </div>
 
