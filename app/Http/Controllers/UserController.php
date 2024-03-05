@@ -82,4 +82,16 @@ class UserController extends Controller
     {
         return view('frontend.tipTravel');
     }
+    public function getCart(Request $request)
+    {
+        return view('frontend.cartDetail');
+    }
+    public function getCheckout(Request $request)
+    {
+        return view('frontend.checkout');
+    }
+    public function getSuccess(Request $request)
+    {
+        return view('frontend.order');
+    }
 }

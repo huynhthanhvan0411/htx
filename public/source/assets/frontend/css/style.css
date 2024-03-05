@@ -254,7 +254,10 @@ ul li {
 .info--item a {
     color: #000;
     text-decoration: none;
-
     font-size: 1rem;
     margin-right: 1rem;
+}
+a {
+    color: #000;
+    text-decoration: none;
 }

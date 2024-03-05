@@ -39,6 +39,16 @@ Route::get('/lien-he', [App\Http\Controllers\UserController::class, 'getContact'
 
 //cam nang
 Route::get('/cam-nang-du-lich', [App\Http\Controllers\UserController::class, 'getTipTravel'])->name("tipTravel");
+
+//gio  hang
+Route::get('/chi-tiet-gio-hang', [App\Http\Controllers\UserController::class, 'getCart'])->name('getCart');
+
+//kiem tra thong tin
+Route::get('/thong-tin-dat-hang', [App\Http\Controllers\UserController::class, 'getCheckout'])->name('getCheckout');
+
+// trang dat hang
+Route::get('/thanh-toan', [App\Http\Controllers\UserController::class, 'getSuccess'])->name('getSuccess');
+
 //gio hang
 //dat hang
 //tai khoan
@@ -52,7 +62,8 @@ Route::get('/logout', [App\Http\Controllers\AccountAuthController::class, 'logou
 Route::post('/register', [App\Http\Controllers\AccountAuthController::class, 'register'])->name('register');
 //2. dang xuat
 
-//
+
+
 
 
 
