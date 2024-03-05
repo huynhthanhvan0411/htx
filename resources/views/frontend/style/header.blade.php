@@ -10,7 +10,7 @@
          </div>
          <div class="header--infoRight pr-4">
              {{--  if no login   --}}
-             <div class="info-item">
+             {{--  <div class="info-item">
                  <button type="button" style="border: none; background-color: #fff; cursor: pointer;" data-toggle="modal"
                      data-target="#loginModal">
                      <i class="fa-solid fa-right-to-bracket"></i>Đăng nhập
@@ -21,13 +21,20 @@
                      data-toggle="modal" data-target="#signUpModal">
                      <i class="fa fa-user"></i>Tạo tài khoản
                  </button>
-             </div>
-             {{--  if login have account   --}}
-             {{--  <div class="info--item d-flex">
-                 <a href="#">Chào bạn /Thanh Vân/ </a>
-                 <a href="#">Đăng xuất</a>
-                 <a href="#">Go admin</a>
              </div>  --}}
+             {{--  if login have account  admin --}}
+             {{--  <div class="info--item d-flex">
+                 <a href="#"><i class="fa fa-user-edit mr-1"></i>Chào bạn Thanh Vân </a>
+                 <a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
+                 <a href="#"><i class="fa fa-user-secret mr-1"></i>Go admin</a>
+                 <a href="#"><i class="fa-solid fa-right-to-bracket mr-1"></i>Đăng xuất</a>
+             </div>  --}}
+             {{--  if login have user  --}}
+             <div class="info--item d-flex">
+                 <a href="#"><i class="fa fa-user-edit mr-1"></i>Chào bạn Thanh Vân </a>
+                 <a href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
+                 <a href="#"><i class="fa-solid fa-right-to-bracket mr-1"></i>Đăng xuất</a>
+             </div>
          </div>
      </div>
      <div class="header">
