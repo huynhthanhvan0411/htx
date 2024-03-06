@@ -13,30 +13,40 @@ class AccountAuthController extends Controller
     //login
     public function getLogin(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            $user = Auth::user();
-            Session::put('user_name_login', $user->name);
-            Session::put('user_id_login', $user->id);
-
-            // You can customize your redirect here
-            return redirect()->route('index')->with('thongbao', 'Đăng nhập thành công');
-        } else {
-            // Authentication failed...
-            return redirect()->back()->with('error', 'Thông tin đăng nhập không chính xác');
-        }
+        return view('frontend.login');
     }
 
     public function postLogin(Request $request)
     {
+        // Validate input data
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Attempt to log in the user
+        if (Auth::attempt($credentials)) {
+            // Authentication was successful
+            $user = Auth::user();
+
+            // Check user role
+            if ($user->role == 1) {
+                return redirect()->route('admin');
+                // Redirect to admin dashboard
+
+            } elseif ($user->role == 2) {
+                return redirect()->route('index'); // Redirect to home page
+            }
+        }
+
+        // Authentication failed
+        return redirect()->route('getLogin')->with('error', 'Invalid email or password.');
     }
 
     //register
     public function getRegister()
     {
-        return view('auth.register');
+        return view('frontend.register');
     }
     public function postRegister()
     {
@@ -45,37 +55,5 @@ class AccountAuthController extends Controller
     //logout
     public function logout()
     {
-        Auth::logout();
-        Session::forget('user_name_login');
-        Session::forget('user_id_login');
-
-        // You can customize your redirect here
-        return redirect()->route('index')->with('thongbao', 'Đăng xuất thành công');
-    }
-    //register
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:accounts',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = Account::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            // Add other fields as necessary
-        ]);
-
-        Session::put('user_name_login', $user->name);
-        Session::put('user_id_login', $user->id);
-
-        // You can customize your redirect here
-        return redirect()->route('index')->with('thongbao', 'Đăng ký thành công');
-    }
-    public function loginAdmin(Request $request)
-    {
-        return view('admin.loginAdmin');
     }
 }

@@ -31,7 +31,6 @@ class AccountController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:account,email,' . $id,
             'phone' => 'required|digits_between:8,10|regex:/^[0-9]+$/',
-            'password' => 'nullable|min:6',
             'address' => 'required|string',
             'role' => 'required|in:1,2',
             'status' => 'required|in:0,1',
@@ -48,11 +47,6 @@ class AccountController extends Controller
         $account->role = $request->role;
         $account->status = $request->status;
 
-        // Check if password is provided and update it
-        // if ($request->filled('password')) {
-        //     $account->password = Hash::make($request->password);
-        // }
-
         // Check if a new image is uploaded
         if ($request->hasFile('image')) {
             // Upload new image
@@ -63,6 +57,12 @@ class AccountController extends Controller
                 unlink(public_path('source/images/account/' . $account->image));
             }
             $account->image = $imageName;
+        }
+
+        // Check if password is provided and update it
+        if ($request->filled('password')) {
+            $password = Hash::make($request->password);
+            $account->password = $password;
         }
 
         // Save the changes to the database
@@ -89,7 +89,7 @@ class AccountController extends Controller
     }
     public function storeDemo(Request $request)
     {
-        //validate
+        // Validate input data
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:account',
@@ -101,24 +101,27 @@ class AccountController extends Controller
             'role' => 'required|in:1,2',
             'status' => 'required|in:0,1',
         ]);
-        //upload image
+
+        // Hash password
+        $password = Hash::make($request->password);
+
         // Upload image
         $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('source/images/account'), $imageName); // Thay đổi đường dẫn lưu ảnh
+        $request->image->move(public_path('source/images/account'), $imageName);
 
-        //create new account
-        $account = new Account();
-        $account->name = $request->name;
-        $account->email = $request->email;
-        $account->phone = $request->phone;
-        $account->image = $imageName; // Lưu tên ảnh vào cơ sở dữ liệu
-        $account->password = $request->password;
-        $account->address = $request->address;
-        $account->role = $request->role;
-        $account->status = $request->status;
-        //save account
-        $account->save();
-        //redirect
+        // Create new account
+        $account = Account::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'image' => $imageName,
+            'password' => $password,
+            'address' => $request->address,
+            'role' => $request->role,
+            'status' => $request->status,
+        ]);
+
+        // Redirect
         if ($account) {
             return redirect()->route('listAccount')->with('success', 'Account created successfully!');
         } else {

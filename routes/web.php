@@ -52,16 +52,16 @@ Route::get('/thanh-toan', [App\Http\Controllers\UserController::class, 'getSucce
 //gio hang
 //dat hang
 //tai khoan
-//1. dang ky va dang nhap
-Route::post('/login', [App\Http\Controllers\AccountAuthController::class, 'login'])->name('login');
-
-// Tuyến đường đăng xuất
-Route::get('/logout', [App\Http\Controllers\AccountAuthController::class, 'logout'])->name('logout');
+//1.  dang nhap
+Route::get('/dang-nhap', [App\Http\Controllers\AccountAuthController::class, 'getLogin'])->name('getLogin');
+// Route::post('/post-dang-nhap', [App\Http\Controllers\AccountAuthController::class, 'postLogin'])->name('postLogin');
+Route::post('/dang-nhap', [App\Http\Controllers\AccountAuthController::class, 'postLogin'])->name('postLogin');
 
 // Tuyến đường đăng ký
-Route::post('/register', [App\Http\Controllers\AccountAuthController::class, 'register'])->name('register');
+Route::get('/dang-ky', [App\Http\Controllers\AccountAuthController::class, 'getRegister'])->name('getRegister');
+Route::post('/post-dang-ky', [App\Http\Controllers\AccountAuthController::class, 'postRegister'])->name('postRegister');
 //2. dang xuat
-
+Route::get('/logout', [App\Http\Controllers\AccountAuthController::class, 'logout'])->name('logout');
 
 
 
@@ -82,7 +82,6 @@ Route::post('/cap-nhat-tai-khoan/{id}', [App\Http\Controllers\AccountController:
 Route::get('/xoa-tai-khoan/{id}', [App\Http\Controllers\AccountController::class, 'delete'])->name("deleteAccount");
 Route::post('/tim-tai-khoan', [App\Http\Controllers\AccountController::class, 'search'])->name('searchAccount');
 Route::post('/luu-tai-khoan', [App\Http\Controllers\AccountController::class, 'storeDemo'])->name('storeAccount');
-
 
 
 //slide -- baner thêm sửa xóa -> BannerController
