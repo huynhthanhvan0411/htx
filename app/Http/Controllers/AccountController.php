@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
     public function listAccount()
     {
-        $accounts = Account::paginate(10);
-        return view('admin.account.adminAccount', compact('accounts'));
+        $users = User::paginate(10);
+        return view('admin.account.adminAccount', compact('users'));
     }
     public function addAccount()
     {
@@ -20,8 +21,8 @@ class AccountController extends Controller
     //editAccount
     public function edit($id)
     {
-        $account = Account::findOrFail($id);
-        return view('admin.account.editAccount', compact('account'));
+        $user = User::findOrFail($id);
+        return view('admin.account.editAccount', compact('user'));
     }
     //update
     public function updateDemo(Request $request, $id)
@@ -37,15 +38,15 @@ class AccountController extends Controller
         ]);
 
         // Find the account by ID
-        $account = Account::findOrFail($id);
+        $user = User::findOrFail($id);
 
         // Update account details
-        $account->name = $request->name;
-        $account->email = $request->email;
-        $account->phone = $request->phone;
-        $account->address = $request->address;
-        $account->role = $request->role;
-        $account->status = $request->status;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->role = $request->role;
+        $user->status = $request->status;
 
         // Check if a new image is uploaded
         if ($request->hasFile('image')) {
@@ -53,20 +54,20 @@ class AccountController extends Controller
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('source/images/account'), $imageName);
             // Delete old image if exists
-            if ($account->image) {
-                unlink(public_path('source/images/account/' . $account->image));
+            if ($user->image) {
+                unlink(public_path('source/images/account/' . $user->image));
             }
-            $account->image = $imageName;
+            $user->image = $imageName;
         }
 
         // Check if password is provided and update it
         if ($request->filled('password')) {
             $password = Hash::make($request->password);
-            $account->password = $password;
+            $user->password = $password;
         }
 
         // Save the changes to the database
-        $account->save();
+        $user->save();
 
         // Redirect with success message
         return redirect()->route('listAccount')->with('success', 'Account updated successfully!');
@@ -75,16 +76,16 @@ class AccountController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('accountSearch');
-        $accounts = Account::where('name', 'like', "%$search%")
+        $users = Account::where('name', 'like', "%$search%")
             ->orWhere('id', $search)
             ->get();
-        return view('admin.account.adminAccount', compact('accounts'));
+        return view('admin.account.adminAccount', compact('users'));
     }
     //delete
     public function delete($id)
     {
-        $account = Account::findOrFail($id);
-        $account->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
         return redirect()->route('listAccount')->with('success', 'Account deleted successfully!');
     }
     public function storeDemo(Request $request)
@@ -110,7 +111,7 @@ class AccountController extends Controller
         $request->image->move(public_path('source/images/account'), $imageName);
 
         // Create new account
-        $account = Account::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -122,7 +123,7 @@ class AccountController extends Controller
         ]);
 
         // Redirect
-        if ($account) {
+        if ($user) {
             return redirect()->route('listAccount')->with('success', 'Account created successfully!');
         } else {
             return back()->withInput()->with('error', 'Failed to create account!');

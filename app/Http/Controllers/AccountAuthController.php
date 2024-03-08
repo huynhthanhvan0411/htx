@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Account;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -28,19 +28,10 @@ class AccountAuthController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentication was successful
             $user = Auth::user();
-
-            // Check user role
-            if ($user->role == 1) {
-                return redirect()->route('admin');
-                // Redirect to admin dashboard
-
-            } elseif ($user->role == 2) {
-                return redirect()->route('index'); // Redirect to home page
-            }
+            return redirect()->route('index')->with('success', 'Login successful!');
+        } else {
+            return redirect()->route('getLogin')->with('error', 'Invalid email or password. Please try again.');
         }
-
-        // Authentication failed
-        return redirect()->route('getLogin')->with('error', 'Invalid email or password.');
     }
 
     //register
@@ -48,12 +39,37 @@ class AccountAuthController extends Controller
     {
         return view('frontend.register');
     }
-    public function postRegister()
+    public function postRegister(Request $request)
     {
-    }
+        // Hash::make($request->password);
+        // dd($request->all());
+        // Validate input data
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+        ]);
 
+        // Create new user instance
+        $user = new User();
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->save();
+
+        // Redirect or do something else after successful registration
+        return redirect()->route('getLogin')->with('success', 'Registration successful! Please login.');
+    }
+    //admin
+    public function loginAdmin()
+    {
+        return view('admin.loginAdmin');
+    }
     //logout
     public function logout()
     {
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('getLogin');
     }
 }

@@ -41,7 +41,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('logout') }}" class="nav-link">
                         <i class="fas fa-sign-out-alt" style="font-size: 14px;"></i>Logout
                     </a>
                 </li>
@@ -66,8 +66,8 @@
                             style="width: 35px; height: 35px; border-radius: 50%;">
                     </div>
                     <div class="info">
-                        <a style="text-align: center; line-height: 20px;" href="#" class="d-block">Huynh Thanh
-                            Van</a>
+                        <a style="text-align: center; line-height: 20px;" href="#" class="d-block">
+                            {{ Auth::user()->name }}</a>
                     </div>
                 </div>
                 <div class="form-inline">
@@ -85,7 +85,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ route('admin') }}" class="nav-link">
+                            <a href="{{ route('adminDashboard') }}" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
                                     Dashboard </p>

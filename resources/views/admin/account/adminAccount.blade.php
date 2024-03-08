@@ -34,34 +34,34 @@
             @php
                 $count = 1;
             @endphp
-            @foreach ($accounts as $account)
+            @foreach ($users as $user)
                 <tr>
                     <td>{{ $count++ }}</td>
-                    <td>{{ $account->name }}</td>
-                    <td>{{ $account->email }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
                     <td>
-                        @if ($account->role == 1)
+                        @if ($user->role == 1)
                             <i class="fa fa-user-secret"></i>
                         @else
                             <i class="fa fa-user"></i>
                         @endif
                     </td>
-                    <td><img style="width: 50px; height: 50px;"
-                            src="{{ asset('source/images/account/' . $account->image) }}"></td>
+                    <td><img style="width: 50px; height: 50px;" src="{{ asset('source/images/account/' . $user->image) }}">
+                    </td>
                     <td>
-                        @if ($account->status == 1)
+                        @if ($user->status == 1)
                             <span class="badge badge-success">Visible</span>
                         @else
                             <span class="badge badge-danger">Hidden</span>
                         @endif
                     </td>
-                    <td>{{ $account->created_at }}</td>
+                    <td>{{ $user->created_at }}</td>
                     <td class="text-right">
-                        <a href="{{ route('editAccount', $account->id) }}" class="btn btn-sm btn-success">
+                        <a href="{{ route('editAccount', $user->id) }}" class="btn btn-sm btn-success">
                             <i class="fas fa-edit"></i>
                         </a>
 
-                        <a href="{{ route('deleteAccount', $account->id) }}" class="btn btn-sm btn-danger btndelete"
+                        <a href="{{ route('deleteAccount', $user->id) }}" class="btn btn-sm btn-danger btndelete"
                             onclick="return confirm('Are you sure to delete this news?')">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -71,7 +71,5 @@
             @endforeach
         </tbody>
     </table>
-    <!-- Hiển thị nút phân trang -->
-    {{ $accounts->links() }}
     <hr>
 @endsection

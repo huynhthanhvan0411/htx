@@ -45,18 +45,14 @@
                </h1>
                <!-- Email input -->
                <div class="form-outline mb-4">
-                   <label class="form-label" for="email">*Email hoặc số điện thoại</label>
+                   <label class="form-label" for="email">*Email </label>
                    <input type="email" name="email" id="email" class="form-control" required />
-
                </div>
-
                <!-- Password input -->
                <div class="form-outline mb-4">
                    <label class="form-label" for="password">*Mật khẩu</label>
                    <input type="password" name="password" id="password" class="form-control" required />
-
                </div>
-
                <!-- 2 column grid layout for inline styling -->
                <div class="row mb-4">
                    <div class="col d-flex justify-content-center">

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Account extends Authenticatable
+class Account extends Model
 {
     use HasFactory, Notifiable;
     protected $table = 'account';
