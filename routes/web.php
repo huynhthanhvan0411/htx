@@ -42,6 +42,9 @@ Route::get('/cam-nang-du-lich', [App\Http\Controllers\UserController::class, 'ge
 
 //gio  hang
 Route::get('/chi-tiet-gio-hang', [App\Http\Controllers\UserController::class, 'getCart'])->name('getCart');
+Route::post('/them-gio-hang/{productId}', [App\Http\Controllers\UserController::class, 'addToCart'])->name('addToCart');
+Route::post('/xoa-gio-hang/{productId}', [App\Http\Controllers\UserController::class, 'removeFromCart'])->name('removeFromCart');
+Route::post('/update-cart/{productId}', 'UserController@updateCart')->name('updateCart');
 
 //kiem tra thong tin
 Route::get('/thong-tin-dat-hang', [App\Http\Controllers\UserController::class, 'getCheckout'])->name('getCheckout');

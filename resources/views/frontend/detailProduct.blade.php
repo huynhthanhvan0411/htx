@@ -17,22 +17,17 @@
             <p>MÔ TẢ: <span> {{ $product->description }}</span>
             </p>
             <div id="buy-amount">
-                <button class="plus">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                </button>
-                <input type="number" min="1" class="numberCart"="number" value="1">
-                <button class="minus"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                    </svg>
-                </button>
-                <button class="add">
-                    <a href="{{ route('getCart') }}">Thêm vào giỏ hàng</a>
-                </button>
+                <button class="plus" type="button" onclick="increaseQuantity()">+</button>
+                <input id="quantityInput" type="number" min="1" class="numberCart" name="quantity" value="1">
+                <button class="minus" type="button" onclick="decreaseQuantity()">-</button>
+                <form action="{{ route('addToCart', $product->id) }}" method="POST">
+                    @csrf
+                    <!-- Input số lượng sản phẩm -->
+                    <input id="quantity" type="hidden" name="quantity" value="1">
+                    <button type="submit">Thêm vào giỏ hàng</button>
+                </form>
             </div>
+
 
         </div>
     </div>
@@ -51,7 +46,7 @@
                     <form action="#" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $relatedProduct->id }}">
-                        <!-- Các trường ẩn khác nếu cần -->
+
                         <button type="submit" class="btnCart">Thêm vào giỏ hàng</button>
                     </form>
                 </div>
@@ -60,3 +55,23 @@
         <hr>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function increaseQuantity() {
+            let quantityInput = document.getElementById('quantityInput');
+            let quantity = parseInt(quantityInput.value);
+            quantityInput.value = quantity + 1;
+            document.getElementById('quantity').value = quantity + 1;
+        }
+
+        function decreaseQuantity() {
+            let quantityInput = document.getElementById('quantityInput');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+                document.getElementById('quantity').value = quantity - 1;
+            }
+        }
+    </script>
+@endpush

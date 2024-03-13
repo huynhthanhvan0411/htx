@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Origin;
 use App\Models\News;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -74,22 +76,92 @@ class UserController extends Controller
 
         return view('frontend.newDetail', compact('news'));
     }
+    // lien he
     public function getContact(Request $request)
     {
         return view('frontend.contact');
     }
+    // cam nang du lich
     public function getTipTravel(Request $request)
     {
         return view('frontend.tipTravel');
     }
+    //gio hang
     public function getCart(Request $request)
     {
-        return view('frontend.cartDetail');
+        $cart = $request->session()->get('cart', []);
+
+        return view('frontend.cartDetail', compact('cart'));
     }
+    // them gio hang
+    public function addToCart(Request $request, $productId)
+    {
+        $product = Product::findOrFail($productId);
+        $quantity = $request->input('quantity', 1);
+
+        // Kiểm tra xem giỏ hàng đã tồn tại chưa
+        if (!$request->session()->has('cart')) {
+            $request->session()->put('cart', []);
+        }
+
+        $cart = $request->session()->get('cart');
+
+        // Thêm sản phẩm vào giỏ hàng
+        $cart[$productId] = [
+            'product' => $product,
+            'quantity' => $quantity,
+            'total_price' => $product->price * $quantity
+        ];
+
+        $request->session()->put('cart', $cart);
+
+        return redirect()->route('getCart');
+    }
+    // Xóa sản phẩm khỏi giỏ hàng
+    public function removeFromCart(Request $request, $productId)
+    {
+        // Kiểm tra xem giỏ hàng có tồn tại không
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+
+            // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+            if (isset($cart[$productId])) {
+                // Xóa sản phẩm khỏi giỏ hàng
+                unset($cart[$productId]);
+                $request->session()->put('cart', $cart);
+            }
+        }
+
+        return redirect()->route('getCart');
+    }
+    public function updateCart(Request $request, $productId)
+    {
+        $quantity = $request->input('quantity');
+
+        // Kiểm tra xem giỏ hàng đã tồn tại chưa
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+
+            // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+            if (isset($cart[$productId])) {
+                // Cập nhật số lượng sản phẩm trong giỏ hàng
+                $cart[$productId]['quantity'] = $quantity;
+                // Tính lại thành tiền dựa trên số lượng mới và giá của sản phẩm
+                $cart[$productId]['total_price'] = $cart[$productId]['product']->price * $quantity;
+                $request->session()->put('cart', $cart);
+            }
+        }
+
+        return redirect()->route('getCart');
+    }
+
+    // checkout
     public function getCheckout(Request $request)
     {
-        return view('frontend.checkout');
+        $cart = $request->session()->get('cart', []);
+        return view('frontend.checkout', compact('cart'));
     }
+    // thanh toan thanh cong or failed
     public function getSuccess(Request $request)
     {
         return view('frontend.order');

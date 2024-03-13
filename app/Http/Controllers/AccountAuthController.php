@@ -70,6 +70,6 @@ class AccountAuthController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return redirect()->route('getLogin');
+        return redirect()->route('index');
     }
 }
