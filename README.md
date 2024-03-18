@@ -6,10 +6,12 @@ just dowload xampp latest
 x
 step 3: git clone link main to xampp/htdoc
 
-step 4: run web , choose folder public click this folder and website will run
+stpe 4: add database form testlr/ htxmg.sql
 
-step 5: login
-admin:
-pass
-user:
-pass
+step 5: run xampp , choose project and choose folder have name: public then click this folder and website will run
+
+step 6: login
+admin: thuy@example.com
+pass: 123456
+user: phuong@gmail.com
+pass: 123456

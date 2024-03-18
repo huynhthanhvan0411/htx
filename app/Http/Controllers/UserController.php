@@ -166,4 +166,17 @@ class UserController extends Controller
     {
         return view('frontend.order');
     }
+    // dich vu
+    public function getService(Request $request){
+        return view('frontend.service');
+    }
+    // chi tiet phong
+
+    public function getDetailRoom(Request $request){
+        return view('frontend.serviceRoom');
+    }
+    //dat tour
+    public function getTour(Request $request){
+        return view('frontend.serviceTour');
+    }
 }

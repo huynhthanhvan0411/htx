@@ -88,16 +88,16 @@
                     <div class="-inf-car" style="margin-top: 30px;">
                         <div style=" display: flex; justify-content: space-between;">
                             <div>
-                                <img src="./client/assets/image/DELASOL_PHAT_LINH_SAPA.jpg" class="card-img-food"
-                                    style="margin: 10px;width: 95%; height: 60%;" alt="...">
+                                <img src="{{ asset('source/assets/frontend/images/DELASOL_PHAT_LINH_SAPA.jpg') }}"
+                                    class="card-img-food" style="margin: 10px;width: 95%; height: 60%;" alt="...">
                             </div>
                             <div>
-                                <img src="./client/assets/image/DELASOL_PHAT_LINH_SAPA.jpg" class="card-img-food"
-                                    style="margin: 10px;width: 95%; height: 60%;" alt="...">
+                                <img src="{{ asset('source/assets/frontend/images/DELASOL_PHAT_LINH_SAPA.jpg') }}"
+                                    class="card-img-food" style="margin: 10px;width: 95%; height: 60%;" alt="...">
                             </div>
                             <div>
-                                <img src="./client/assets/image/DELASOL_PHAT_LINH_SAPA.jpg" class="card-img-food"
-                                    style="margin: 10px;width: 95%; height: 60%;" alt="...">
+                                <img src="{{ asset('source/assets/frontend/images/DELASOL_PHAT_LINH_SAPA.jpg') }}"
+                                    class="card-img-food" style="margin: 10px;width: 95%; height: 60%;" alt="...">
                             </div>
 
                         </div>
@@ -106,68 +106,66 @@
                 <div class="intro-room">
                     <div class=""style="text-align: center; margin-bottom: 15px;">
                         <h4>Các loại phòng chúng tôi có</h4>
-                        <span style="font-size: 10px;">Nhấn vào ảnh để xem chi tiết phòng</span>
+                        <a href="{{ route('getDetailRoom') }}">
+                            <span style="font-size: 10px;">Nhấn vào để xem chi tiết phòng</span>
+                        </a>
                     </div>
                     <div class="slider-room">
-                        <div id="carouselExampleControlsRoom" class="carousel slider" data-bs-ride="carousel">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <a href=""><img src="./client/assets/image/slide1.webp"
-                                            class="d-block w-100 slider" alt="..."></a>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('source/assets/frontend/images/slide1.webp') }}" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <a href=""><img src="./client/assets/image/slide2.webp"
-                                            class="d-block w-100 slider" alt="..."></a>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('source/assets/frontend/images/slide2.jpg') }}asset('source/assets/frontend/images/slide2.jpeg')"
+                                        alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <a href=""><img src="./client/assets/image/slide3.webp"
-                                            class="d-block w-100 slider" alt="..."></a>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('source/assets/frontend/images/slide3.jpg') }}" alt="Third slide">
                                 </div>
+
                             </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleControlsRoom" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleControlsRoom" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="intro-tour">
                     <div class=""style="text-align: center; margin-bottom: 15px;">
                         <h4>Các tour nổi bật</h4>
-                        <span style="font-size: 10px;">Nhấn vào ảnh để xem chi tiết tour</span>
+                        <a href="{{ route('getTour') }}">
+                            <span style="font-size: 10px;">Nhấn vào để xem chi tiết tour</span>
+                        </a>
                     </div>
                     <div class="slider-tour">
-                        <div id="carouselExampleControlsTour" class="carousel slider" data-bs-ride="carousel">
+                        <div id="caroutour" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#caroutour" data-slide-to="0" class="active"></li>
+                                <li data-target="#caroutour" data-slide-to="1"></li>
+                                <li data-target="#caroutour" data-slide-to="2"></li>
+                            </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <a href=""><img src="./client/assets/image/slide1.webp"
-                                            class="d-block w-100 slider" alt="..."></a>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('source/assets/frontend/images/slide1.webp') }}" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <a href=""><img src="./client/assets/image/slide2.webp"
-                                            class="d-block w-100 slider" alt="..."></a>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('source/assets/frontend/images/slide2.jpg') }}asset('source/assets/frontend/images/slide2.jpeg')"
+                                        alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <a href=""><img src="./client/assets/image/slide3.webp"
-                                            class="d-block w-100 slider" alt="..."></a>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('source/assets/frontend/images/slide3.jpg') }}" alt="Third slide">
                                 </div>
+
                             </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleControlsTour" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleControlsTour" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
                         </div>
                     </div>
                 </div>

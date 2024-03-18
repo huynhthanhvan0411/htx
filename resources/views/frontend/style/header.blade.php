@@ -66,7 +66,7 @@
                          </li>
 
                          <li class="nav-item">
-                             <a class="nav-link " href="service.php">Dịch vụ</a>
+                             <a class="nav-link " href="{{ route('getService') }}">Dịch vụ</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link " href="{{ route('tipTravel') }}">Cẩm nang du lịch</a>

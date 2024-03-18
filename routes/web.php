@@ -52,8 +52,11 @@ Route::get('/thong-tin-dat-hang', [App\Http\Controllers\UserController::class, '
 // trang dat hang
 Route::get('/thanh-toan', [App\Http\Controllers\UserController::class, 'getSuccess'])->name('getSuccess');
 
-//gio hang
-//dat hang
+// dich vu
+Route::get('/dich-vu', [App\Http\Controllers\UserController::class, 'getService'])->name('getService');
+Route::get('/chi-tiet-phong', [App\Http\Controllers\UserController::class, 'getDetailRoom'])->name('getDetailRoom');
+Route::get('/dat-tour', [App\Http\Controllers\UserController::class, 'getTour'])->name('getTour');
+
 //tai khoan
 //1.  dang nhap
 Route::get('/dang-nhap', [App\Http\Controllers\AccountAuthController::class, 'getLogin'])->name('getLogin');
