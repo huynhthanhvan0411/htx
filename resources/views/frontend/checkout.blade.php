@@ -144,7 +144,7 @@
                         <div class="hoten">
                             <input type="text" name="name" id="name" placeholder="HỌ TÊN"
                                 value="{{ Auth::user()->name }}">
-                            <input type="tel" name="" id="sdt" placeholder="SỐ ĐIỆN THOẠI"
+                            <input type="tel" name="phone" id="phone" placeholder="SỐ ĐIỆN THOẠI"
                                 value="{{ Auth::user()->phone }}">
                         </div>
                         <input type="email" id='email' name="email" value="{{ Auth::user()->email }}"
@@ -154,18 +154,14 @@
                         <input type="text" id='note' name="note" placeholder="GHI CHÚ">
                     </div>
                     <p><b>ĐƠN VỊ VẬN CHUYỂN</b></p>
-                    <div class="delivery">
-                        <div class="delivery--name"><input type="radio" value="1">GIAO HÀNG TIẾT KIỆM</div>
-                        <div class="delivery--name"><input type="radio" value="2">GIAO HÀNG NHANH</div>
-                        <div class="delivery--name"><input type="radio" value="3">J&T EXPRESS</div>
-                    </div>
-
-                    <p><b>PHƯƠNG THỨC THANH TOÁN</b></p>
-                    <div class="payment">
-                        <div class="payment--name"><input type="radio" value="1">THANH TOÁN KHI NHẬN HÀNG</div>
-                        <div class="payment--name"><input type="radio" value="2">CHUYỂN KHOẢN NGÂN HÀNG</div>
-                        <div class="payment--name"><input type="radio" value="3">QUA THẺ</div>
-                    </div>
+                    <select name="delivery">
+                        <option value="1"> GIAO HÀNG TIẾT KIỆM</option>
+                        <option value="2">GIAO HANG NHANH</option>
+                    </select>
+                    <select>
+                        <option value="1">THANH TOÁN KHI NHẬN HÀNG</option>
+                        <option value="2">CHUYỂN KHOẢN NGÂN HÀNG</option>
+                    </select>
                 </div>
                 <div class="col-6">
                     <div class="checkout--title">
@@ -180,27 +176,40 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $totalPrice = 0; // Khởi tạo biến tổng tiền
+                                @endphp
                                 @foreach ($cart as $productId => $item)
+                                    @php
+                                        // Tính tổng tiền của từng mặt hàng
+                                        $subtotal = $item['total_price'];
+                                        // Cộng tổng tiền vào biến tổng tiền
+                                        $totalPrice += $subtotal;
+                                    @endphp
                                     <tr class="">
                                         <td class="number">{{ $loop->iteration }}</td>
                                         <td class="name">{{ $item['product']->name }}</td>
                                         <td class="price">{{ number_format($item['product']->price) }} đ</td>
                                         <td class="quantity">{{ $item['quantity'] }}</td>
-                                        <td class="total-price">{{ number_format($item['total_price']) }} đ</td>
+                                        <td class="total-price">{{ number_format($subtotal) }} đ</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{-- Hiển thị tổng tiền --}}
+                        <div class="total">
+                            <h4>Tổng Tiền: {{ number_format($totalPrice) }} đ</h4>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row" style="width: 100%">
-
-                <button type="button" class='button'>
-                    <a href="{{ route('getSuccess') }}"> ĐẶT HÀNG <br>HOTLINE: 0394407543 (24/7)</a>
-                </button>
-
-            </div>
-        @endguest
+        </div>
+        {{--  Button to place order --}}
+        <form action="{{ route('postCheckout') }}" method="post">
+            @csrf
+            <button type="submit" class=" btn btn-primary btn-checkout" style="margin: 20px;">Đặt
+                Hàng</button>
+        </form>
+    @endguest
     </div>
 @endsection

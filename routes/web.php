@@ -48,6 +48,7 @@ Route::post('/update-cart/{productId}', 'UserController@updateCart')->name('upda
 
 //kiem tra thong tin
 Route::get('/thong-tin-dat-hang', [App\Http\Controllers\UserController::class, 'getCheckout'])->name('getCheckout');
+Route::post('/checkout',[App\Http\Controllers\UserController::class, 'postCheckout'])->name('postCheckout');
 
 // trang dat hang
 Route::get('/thanh-toan', [App\Http\Controllers\UserController::class, 'getSuccess'])->name('getSuccess');

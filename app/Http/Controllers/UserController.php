@@ -8,9 +8,13 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Origin;
 use App\Models\News;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -161,6 +165,51 @@ class UserController extends Controller
         $cart = $request->session()->get('cart', []);
         return view('frontend.checkout', compact('cart'));
     }
+    public function postCheckout(Request $request)
+    {
+    if (Auth::check()) {
+        $cart = $request->session()->get('cart', []);
+
+        // Tạo mới đơn hàng
+        $order = new Order();
+        $order->name = Auth::user()->name;
+        $order->email = Auth::user()->email;
+        $order->phone = Auth::user()->phone;
+        $order->address = Auth::user()->address;
+        $order->note = $request->note;
+        // Tính tổng tiền
+        $totalPrice = 0;
+        foreach ($cart as $productId => $item) {
+            $totalPrice += $item['total_price'];
+        }
+        $order->total = $totalPrice;
+        $order->delivery = $request->delivery;
+        $order->payment = $request->payment;
+        $order->status = '1'; // Trạng thái mặc định khi đặt hàng
+        $order->save();
+
+        // Thêm chi tiết đơn hàng
+        foreach ($cart as $productId => $item) {
+            $orderDetail = new OrderDetail();
+            $orderDetail->order_id = $order->id;
+            $orderDetail->product_id = $productId;
+            $orderDetail->quality = $item['quantity'];
+            $orderDetail->price = $item['product']->price;
+            $orderDetail->save();
+        }
+
+        // Xóa giỏ hàng sau khi đặt hàng thành công
+        $request->session()->forget('cart');
+
+        // Chuyển hướng đến trang thanh toán thành công
+        return redirect()->route('getSuccess');
+    } else {
+        // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+        return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để thực hiện đặt hàng.');
+    }
+
+    }
+
     // thanh toan thanh cong or failed
     public function getSuccess(Request $request)
     {

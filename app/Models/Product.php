@@ -24,4 +24,8 @@ class Product extends Model
     {
         return $this->belongsTo(Origin::class, 'origin_id');
     }
+        public function orderDetail()
+    {
+        return $this->hasMany(OrderDetail::class, 'id');
+    }
 }

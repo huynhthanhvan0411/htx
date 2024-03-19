@@ -6,7 +6,7 @@
     Đơn hàng
 @endsection
 @section('content-admin')
-    <form action="./?module=admin&controller=banner&action=searchBannerFull" class="form-inline" method="post">
+    <form action="#" class="form-inline" method="post">
 
         <div class="form-group">
             <input class="form-control search-input" name="bannerSearch" placeholder="Search By Name..">
@@ -32,33 +32,39 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Milk Tea</td>
-                <td>
-                    <span class="badge badge-success">Visible</span>
-                </td>
-                <td>2023-10-23 21:45:57</td>
-                <td>
-                    2023-10-23 21:45:57
-                </td>
-                <td>
-                    <span class="badge badge-success">Visible</span>
-                </td>
-                <td>2023-10-23 21:45:57</td>
-                <td>
-                    2023-10-23 21:45:57
-                </td>
-                <td class="text-right">
-                    <a href="#" class="btn btn-sm btn-success">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btndelete"
-                        onclick="return confirm('Are you sure to delete this banner ?')">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
+            @php
+                $count = 1;
+            @endphp
+            @foreach ($order as $ord)
+                <tr>
+                    <td> {{ $count++ }}</td>
+                    <td>{{ $ord->name }}</td>
+                    <td>
+                        <span class="badge badge-success">Visible</span>
+                    </td>
+                    <td>2023-10-23 21:45:57</td>
+                    <td>
+                        2023-10-23 21:45:57
+                    </td>
+                    <td>
+                        <span class="badge badge-success">Visible</span>
+                    </td>
+                    <td>{{ $ord->toltal }}</td>
+                    <td>
+                        {{ $ord->created_at }}
+                    </td>
+                    <td class="text-right">
+                        <a href="#" class="btn btn-sm btn-success">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-danger btndelete"
+                            onclick="return confirm('Are you sure to delete this banner ?')">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+
         </tbody>
     </table>
     <hr>

@@ -31,23 +31,7 @@
         <tbody>
             <tr>
                 <td>1</td>
-                <td>Milk Tea</td>
-                <td>
-                    <span class="badge badge-success">Visible</span>
-                </td>
-                <td>2023-10-23 21:45:57</td>
-                <td>
-                    2023-10-23 21:45:57
-                </td>
-                <td class="text-right">
-                    <a href="#" class="btn btn-sm btn-success">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btndelete"
-                        onclick="return confirm('Are you sure to delete this banner ?')">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </td>
+
             </tr>
         </tbody>
     </table>
