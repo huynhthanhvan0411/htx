@@ -10,6 +10,9 @@ use App\Models\Origin;
 use App\Models\News;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Payment;
+use App\Models\Delivery;
+use App\Models\Contact;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -24,10 +27,12 @@ class UserController extends Controller
         //hiển thi banner
         $banners = Banner::where('status', 1)->get();
         //hien thi sanpham trang header
-        $products = Product::all();
-        $categories = Category::all();
-        $origins = Origin::all();
-        return view('frontend.index', compact('banners', 'products', 'categories', 'origins'));
+        // $categories = Category::all();
+        // $origins = Origin::all();
+        $latest_product=Product::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        // hien thi tin tuc moi nhat ra trang chu
+        $latest_news = News::where('status', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        return view('frontend.index', compact('banners','latest_product','latest_news'));
     }
 
     //loai san pham & chi tiet san pham & tim kiem & tat ca san pham
@@ -80,11 +85,7 @@ class UserController extends Controller
 
         return view('frontend.newDetail', compact('news'));
     }
-    // lien he
-    public function getContact(Request $request)
-    {
-        return view('frontend.contact');
-    }
+
     // cam nang du lich
     public function getTipTravel(Request $request)
     {
@@ -163,8 +164,18 @@ class UserController extends Controller
     public function getCheckout(Request $request)
     {
         $cart = $request->session()->get('cart', []);
-        return view('frontend.checkout', compact('cart'));
+        $delivery = Delivery::all();
+        $payment = Payment::all();
+        return view('frontend.checkout', compact('cart', 'delivery', 'payment'));
     }
+    private function calculateTotalPrice($cart)
+{
+    $totalPrice = 0;
+    foreach ($cart as $productId => $item) {
+        $totalPrice += $item['total_price'];
+    }
+    return $totalPrice;
+}
     public function postCheckout(Request $request)
     {
     if (Auth::check()) {
@@ -177,14 +188,11 @@ class UserController extends Controller
         $order->phone = Auth::user()->phone;
         $order->address = Auth::user()->address;
         $order->note = $request->note;
-        // Tính tổng tiền
-        $totalPrice = 0;
-        foreach ($cart as $productId => $item) {
-            $totalPrice += $item['total_price'];
-        }
+        // Gọi hàm tính tổng tiền
+        $totalPrice = $this->calculateTotalPrice($cart);
         $order->total = $totalPrice;
-        $order->delivery = $request->delivery;
-        $order->payment = $request->payment;
+        $order->delivery_id = $request->delivery_id;
+        $order->payment_id = $request->delivery_id;
         $order->status = '1'; // Trạng thái mặc định khi đặt hàng
         $order->save();
 
@@ -228,4 +236,30 @@ class UserController extends Controller
     public function getTour(Request $request){
         return view('frontend.serviceTour');
     }
+    // lien he
+    public function getContact(Request $request){
+        return view('frontend.contact');
+    }
+
+    public function postContact(Request $request){
+
+        //validate request
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required|numeric|min:8|max:10',
+            'content'=>'required',
+        ]);
+        //create new contact
+         $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->content = $request->content;
+        //save
+
+        $contact->save();
+
+    }
+
 }

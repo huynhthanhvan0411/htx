@@ -128,3 +128,7 @@
 .item-order button:hover {
     background-color: #0d472d;
 }
+.order--check a:hover {
+    text-decoration: none;
+    color: #fff;
+}

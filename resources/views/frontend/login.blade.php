@@ -56,11 +56,11 @@
                <!-- 2 column grid layout for inline styling -->
                <div class="row mb-4">
                    <div class="col d-flex justify-content-center">
-                       <!-- Checkbox -->
                        <div class="form-check">
-                           <label class="form-check-label" for="checkbox"> Nhớ mật khẩu </label>
-                           <input class="form-check-input" type="checkbox" value="" id="checkbox" name="checkbox"
-                               checked />
+                           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                           <label class="form-check-label" for="flexCheckDefault">
+                               Nhớ mật khẩu
+                           </label>
                        </div>
                    </div>
 
@@ -72,12 +72,16 @@
 
                <!-- Submit button -->
                <div class="card-login d-flex justify-content-center">
-                   <button type="submit" class="btn-login  btn-block mb-4">Đăng nhập</button>
+                   <button type="submit" class="btn-login  btn-block mb-4 ">
+                       <span style="text-align: center">
+                           Đăng nhập
+                       </span>
+                   </button>
                </div>
 
                <!-- Register buttons -->
                <div class="text-center">
-                   <p>Bạn chưa có tài khoản? <a style="text-decoration: none; font-weight: bold;"
+                   <p>Bạn chưa có tài khoản? <a style="text-decoration: none; font-weight: bold; "
                            href="{{ route('getRegister') }}">Đăng ký</a> ngay!</p>
                    <div class="social-or"><span>Hoặc</span></div>
                    <div class="card-social" style="display: flex; justify-content: center;">

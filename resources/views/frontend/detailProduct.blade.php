@@ -19,12 +19,15 @@
             <div id="buy-amount">
                 <button class="plus" type="button" onclick="increaseQuantity()">+</button>
                 <input id="quantityInput" type="number" min="1" class="numberCart" name="quantity" value="1">
-                <button class="minus" type="button" onclick="decreaseQuantity()">-</button>
+                <button class="minus " type="button" onclick="decreaseQuantity()">-</button>
                 <form action="{{ route('addToCart', $product->id) }}" method="POST">
                     @csrf
                     <!-- Input số lượng sản phẩm -->
                     <input id="quantity" type="hidden" name="quantity" value="1">
-                    <button type="submit">Thêm vào giỏ hàng</button>
+                    <button
+                        style="margin-left: 20px;border-radius: 10px; background-color: #aef2b2; padding: 5px 10px; outline: none; border:none; cursor: pointer;"
+                        type="submit">Thêm vào giỏ
+                        hàng</button>
                 </form>
             </div>
 

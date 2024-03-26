@@ -105,6 +105,11 @@
             width: 100%;
             padding: 20px;
         }
+
+        a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
     <h2 style="margin: 20px 80px ">THÔNG TIN KHÁCH HÀNG</h2>
     <div class="main">
@@ -151,16 +156,20 @@
                             placeholder="EMAIL">
                         <input type="text" id='address' name="address" placeholder="ĐỊA CHỈ"
                             value="{{ Auth::user()->address }}">
-                        <input type="text" id='note' name="note" placeholder="GHI CHÚ">
+                        {{-- <input type="text" id='note' name="note" placeholder="GHI CHÚ"> --}}
                     </div>
                     <p><b>ĐƠN VỊ VẬN CHUYỂN</b></p>
-                    <select name="delivery">
-                        <option value="1"> GIAO HÀNG TIẾT KIỆM</option>
-                        <option value="2">GIAO HANG NHANH</option>
+                    <select name="delivery_id">
+                        @foreach ($delivery as $dl)
+                            <option value="{{ $dl->id }}">{{ $dl->name }}</option>
+                        @endforeach
                     </select>
-                    <select>
-                        <option value="1">THANH TOÁN KHI NHẬN HÀNG</option>
-                        <option value="2">CHUYỂN KHOẢN NGÂN HÀNG</option>
+                    <select name="payment_id">
+                        @foreach ($payment as $pm)
+                            <option value="{{ $pm->id }}">
+                                {{ $pm->name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-6">

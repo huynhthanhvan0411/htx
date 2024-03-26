@@ -16,9 +16,10 @@
                                     alt="{{ $product->name }}">
                                 <p class="name">{{ $product->name }}</p>
                                 <p class="price"><b>{{ number_format($product->price) }} VNĐ</b></p>
+
                             </a>
                             <button class="btnCart">
-                                <a href="{{ route('getCart') }}"> Thêm giỏ hàng</a>
+                                <a href="{{ route('detailProduct', $product->id) }}"> Thêm giỏ hàng</a>
                             </button>
                         </div>
                     @endforeach

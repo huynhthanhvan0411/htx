@@ -12,11 +12,21 @@ class Order extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'name',  'email', 'phone', 'address', 'note','total', 'delivery', 'payment', 'status',
+        'name',  'email', 'phone', 'address', 'note','total', 'delivery_id', 'payment_id', 'status',
     ];
        public function orderDetail()
     {
         return $this->hasMany(OrderDetail::class, 'id');
+    }
+     public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
+
+    }
+  public function delivery()
+    {
+        return $this->belongsTo(Delivery::class, 'delivery_id');
+
     }
 
 }

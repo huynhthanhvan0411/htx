@@ -29,8 +29,8 @@
             @foreach ($latest_news as $item)
                 <div class="card-news2 col-3">
                     <a href="{{ route('getDetailNews', $item->id) }}">
-                        <img src="{{ asset('source/assets/frontend/images/BAMBOO_SAPA_HOTEL.jpg') }}" class="img-news"
-                            width="100%" alt="...">
+                        <img style="height: 270px; width: 250px;" src="{{ asset('source/images/news/' . $item->image) }}"
+                            class="img-news" width="100%" alt="...">
                         <div class="card-body">
                             <h4 class="new2-title" style="text-align: center;">{{ $item->title }}</h4>
                             <p class="new2-text" style="text-align: justify;">{{ $item->created_at->format('d.m.Y') }}</p>

@@ -36,7 +36,7 @@ Route::get('/chi-tiet-tin-tuc/{id}', [App\Http\Controllers\UserController::class
 
 //3. lien he
 Route::get('/lien-he', [App\Http\Controllers\UserController::class, 'getContact'])->name("contact");
-
+Route::post('/gui-lien-he', [App\Http\Controllers\UserController::class, 'postContact'])->name("postContact");
 //cam nang
 Route::get('/cam-nang-du-lich', [App\Http\Controllers\UserController::class, 'getTipTravel'])->name("tipTravel");
 

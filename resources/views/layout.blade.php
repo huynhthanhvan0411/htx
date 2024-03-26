@@ -19,6 +19,7 @@
     {{--  LINK   --}}
     @include('frontend.style.script')
 
+
 </body>
 
 </html>

@@ -11,13 +11,13 @@
          <div class="header--infoRight pr-4">
              @if (!Auth::check())
                  <div class="info-item">
-                     <button><a href="{{ route('getLogin') }}">
-                             <i class="fa-solid fa-right-to-bracket"></i>Đăng nhập
+                     <button class="btn__loginUser"><a href="{{ route('getLogin') }}">
+                             <i class="fa-solid fa-right-to-bracket "></i>Đăng nhập
                          </a></button>
                  </div>
                  <div class="info--item pl-4">
-                     <button><a href="{{ route('getRegister') }}">
-                             <i class="fa-solid fa-right-to-bracket"></i>Đăng kí
+                     <button class="btn__loginUser"><a href="{{ route('getRegister') }}">
+                             <i class="fa-solid fa-right-to-bracket pr-1"></i>Đăng kí
                          </a></button>
                  </div>
              @else

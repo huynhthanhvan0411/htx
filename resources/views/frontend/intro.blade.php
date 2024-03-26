@@ -1,10 +1,10 @@
 @extends('layout')
 @section('title-user')
-   Giới thiệu
+    Giới thiệu
 @endsection
 @section('content-layout')
     {{--  about us   --}}
-    <div class="intro pt-5 container ">
+    <div class="intro pt-5 container pb-5 ">
         <div class="row g-0">
             <div class="col-md-6">
                 <div class="intro-body ">
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="mission container py-4">
+    {{-- <div class="mission container py-4">
         <h3 class="title">SỨ MỆNH DOANH NGHIỆP</h3>
         <div class="mission--card animate__animated animate__pulse">
             <div class="mission--item">
@@ -83,5 +83,5 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

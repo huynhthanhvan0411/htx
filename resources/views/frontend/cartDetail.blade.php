@@ -51,10 +51,11 @@
         <div>
         </div>
     </div>
+
     <div class="container">
         <div class="item-order">
 
-            <div class="order">
+            <div class="order--check">
                 <button>
                     <a href="{{ route('getCheckout') }}">Đặt mua</a>
                 </button>
@@ -62,6 +63,7 @@
 
         </div>
     </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

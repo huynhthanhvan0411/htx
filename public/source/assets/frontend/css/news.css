@@ -1,9 +1,8 @@
-
 .news1 {
     margin: 30px;
 }
 
-.list-news1 a{
+.list-news1 a {
     text-decoration: none;
     color: #000;
     margin: 20px;
@@ -14,18 +13,11 @@
     margin-left: 0;
 }
 
-.news1-title{
+.news1-title {
     font-weight: bold;
     background-color: #999;
     padding: 7px;
     padding-right: 0;
-}
-
-.list-news1 a:hover{
-    color: #627b1f;
-    text-shadow: 0 5px 7px  #525710;
-    font-size: 18px;
-    
 }
 
 .card-news2 {
@@ -40,13 +32,4 @@
     color: #000;
     background-color: #ffffff;
     padding-bottom: 15px;
-}
-
-.card-news2 a:hover{
-    color: #ffffff;
-    background-color: #135b3a;
-    box-shadow: 0 10px 13px 0 #0d472d;
-    padding-left: 20px;
-    padding-top: 15px;
-    padding-right: 20px;
 }
